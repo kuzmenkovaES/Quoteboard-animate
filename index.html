@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Quoteboard Example</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script> var __basePath = ''; </script>
+		<style> html, body { margin: 0; padding: 0; height: 100%; } </style>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+		<script src="https://unpkg.com/ag-grid@18.1.1/dist/ag-grid.min.js"></script>
+	</head>
+	<body>
+		<style>
+		    .align-right {
+		        text-align: right;
+		    }
+		</style>
+		<div ng-app="quoteboardGrid" ng-controller="quoteboardGridCtrl" style="height: 100%">
+			<div class="container">
+				<h2>My Quoteboard</h2>
+				<form class="form-inline">
+					<div class="form-group">
+					  <input type="text" class="form-control col-sm-4" placeholder="Symbol Name" ng-model="symbolName">
+					  <button type="button" ng-click="addNewRow()" style="margin-left: 10px;" class="btn btn-success">Add Symbol</button>
+					</div>
+				</form>
+				<div style="height: 100%; padding-top: 40px; box-sizing: border-box;">
+			    	<div ag-grid="gridOptions" class="ag-theme-balham" style="min-height: 300px; height: 70vh;"></div>
+			    </div>
+			</div>
+		</div>
+
+	    <script src="main.js"></script>
+	</body>
+</html>
