@@ -43,7 +43,8 @@ module.service('mainFactory', [ '$interval', function($interval) {
         animateRows: true,
         defaultColDef: {
             valueFormatter: function (params) {
-                if(typeof(params.value) === 'number'){
+                console.log(params)
+                if(params.colDef.field !== 'symbol'){
                     return formatNumber(params.value);
                 }
             },
@@ -53,7 +54,7 @@ module.service('mainFactory', [ '$interval', function($interval) {
     };
 
     function formatNumber(number) {
-        return Math.floor(number).toString().replace(/(\d)(?=(\d{2})+(?!\d))/g, "$1,");
+        return number.toFixed(2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
 
     function generateDataForNewRow(symbolName){
@@ -74,8 +75,8 @@ module.service('mainFactory', [ '$interval', function($interval) {
 
         rowNode.setDataValue('low', (price < row.low ? price : row.low) );
         rowNode.setDataValue('high', price > row.high ? price : row.high);
-        rowNode.setDataValue('change', (row.last - price).toFixed(2));
-        rowNode.setDataValue('last', price < 1 ? 0 : price);
+        rowNode.setDataValue('change', (row.last - price));
+        rowNode.setDataValue('last', price < 1 ? 0 : price);        
     }
 
     function generateRandomNumber(min, max){
@@ -91,7 +92,7 @@ module.service('mainFactory', [ '$interval', function($interval) {
     $interval(function() {
         var countUpdatesRow = Math.floor(Math.random() * rowData.length);
         changeData(rowData[countUpdatesRow], countUpdatesRow);
-    }, 700);
+    }, 5000);
 
     this.getTable = function () {
         return gridOptions;
