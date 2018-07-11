@@ -10,9 +10,10 @@ module.controller('quoteboardGridCtrl', [ '$scope', '$interval', 'mainFactory', 
     $scope.gridOptions = mainFactory.getTable();
 
     $scope.addNewRow = function(){
-        mainFactory.addRow($scope.symbolName);
-    };    
-
+        var row = mainFactory.addNewRow($scope.symbolName);
+        $scope.gridOptions.api.setRowData(row);
+        $scope.symbolName = '';
+    };
 }]);
 module.service('mainFactory', [ '$interval', function($interval) {
     var minPrice = 100,
@@ -68,8 +69,8 @@ module.service('mainFactory', [ '$interval', function($interval) {
     }
 
     function changeData(row, index) {
-        var price = generateRandomNumber(minPrice, maxPrice),
-            rowNode = gridOptions.api.getDisplayedRowAtIndex(index);
+        var price = generateRandomNumber(minPrice, maxPrice);
+        var rowNode = gridOptions.api.getDisplayedRowAtIndex(index);
 
         rowNode.setDataValue('low', (price < row.low ? price : row.low) );
         rowNode.setDataValue('high', price > row.high ? price : row.high);
@@ -83,6 +84,8 @@ module.service('mainFactory', [ '$interval', function($interval) {
     
     function addRow(symbolName){
         rowData.push(generateDataForNewRow(symbolName));
+        return rowData;
+
     }
 
     $interval(function() {
@@ -94,7 +97,7 @@ module.service('mainFactory', [ '$interval', function($interval) {
         return gridOptions;
     };
 
-    this.addRow = function (symbol) {
-        addRow(symbol);
+    this.addNewRow = function (symbol) {
+        return addRow(symbol);
     };
 }]);
