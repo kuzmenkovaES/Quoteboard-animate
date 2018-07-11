@@ -91,7 +91,7 @@ module.service('mainFactory', [ '$interval', function($interval) {
     $interval(function() {
         var countUpdatesRow = Math.floor(Math.random() * rowData.length);
         changeData(rowData[countUpdatesRow], countUpdatesRow);
-    }, 5000);
+    }, 1000);
 
     this.getTable = function () {
         return gridOptions;
