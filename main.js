@@ -36,7 +36,6 @@ module.service('mainFactory', [ '$interval', function($interval) {
         columnDefs: columnDefs,
         rowData: rowData,
         angularCompileRows: true,
-        enableFilter: true,
         enableSorting: true,
         rowHeight: 35,
         enableColResize: true,
