@@ -43,7 +43,6 @@ module.service('mainFactory', [ '$interval', function($interval) {
         animateRows: true,
         defaultColDef: {
             valueFormatter: function (params) {
-                console.log(params)
                 if(params.colDef.field !== 'symbol'){
                     return formatNumber(params.value);
                 }
